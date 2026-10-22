@@ -1,145 +1,185 @@
-# 🛒 Online Retail Data Analysis
+# 📊 Online Retail Data Analysis
+
+## 🚀 Application interactive
+
+**Explorez les données de vente grâce à un tableau de bord interactif développé avec Python, Streamlit et Plotly.**
+
+👉 **Accéder au tableau de bord en ligne**
 
 ## 📌 Présentation du projet
 
-Ce projet consiste à analyser les données d'une entreprise de vente en ligne afin d'identifier des tendances commerciales, de comprendre le comportement des clients et de produire des informations utiles à la prise de décision.
+Ce projet consiste à analyser les données d'une entreprise de vente au détail en ligne afin d'identifier les tendances commerciales, les produits les plus performants, les principaux marchés et les comportements des clients.
 
-Le projet couvre quatre étapes principales : le nettoyage des données, l'analyse SQL, la visualisation des résultats et la segmentation des clients par la méthode RFM.
+Il couvre plusieurs étapes d'un projet réel d'analyse de données : nettoyage, analyse SQL, visualisation, segmentation client et création d'une application web interactive.
 
 ## 🎯 Objectifs
 
-- Nettoyer et structurer un jeu de données transactionnelles.
-- Utiliser Python et Pandas pour préparer les données.
-- Répondre à des questions métier avec SQL et SQLite.
-- Visualiser les performances commerciales avec Matplotlib et Seaborn.
-- Segmenter les clients selon leur récence, leur fréquence d'achat et leur valeur monétaire.
-- Formuler des recommandations commerciales à partir des résultats obtenus.
-
-## 📊 Jeu de données
-
-Le projet utilise le jeu de données **Online Retail**, qui contient des informations sur les factures, les produits, les quantités vendues, les prix, les dates d'achat, les clients et les pays.
-
-Après le nettoyage, le jeu de données contient :
-
-- **536 641 lignes**
-- **8 colonnes**
-- **0 doublon exact restant**
-
-Les principales colonnes sont `InvoiceNo`, `StockCode`, `Description`, `Quantity`, `InvoiceDate`, `UnitPrice`, `CustomerID` et `Country`.
-
-Les valeurs manquantes, les doublons et les transactions atypiques sont examinés durant la préparation des données. Les quantités négatives sont conservées dans le jeu nettoyé pour tenir compte des retours ou annulations potentiels. Les analyses de ventes positives appliquent des filtres adaptés à chaque question métier.
+- Nettoyer et structurer un jeu de données commerciales.
+- Analyser les ventes à l'aide de SQL et SQLite.
+- Identifier les tendances mensuelles et les performances par pays et par produit.
+- Réaliser une segmentation des clients avec la méthode RFM.
+- Concevoir un tableau de bord interactif destiné aux décideurs métiers.
+- Présenter les résultats et formuler des recommandations commerciales.
 
 ## 🛠️ Technologies utilisées
 
-- **Python**
-- **Pandas**
-- **SQLite / SQL**
-- **Matplotlib**
-- **Seaborn**
-- **Jupyter Notebook**
-- **Git et GitHub**
+- **Python** : langage de programmation.
+- **Pandas** : nettoyage, préparation et analyse des données.
+- **SQLite et SQL** : interrogation et analyse des données.
+- **Matplotlib et Seaborn** : visualisation exploratoire.
+- **Plotly** : graphiques interactifs.
+- **Streamlit** : création et déploiement du tableau de bord.
+- **Jupyter Notebook** : exploration et documentation des analyses.
+- **GitHub** : versionnement et partage du projet.
 
-## 📁 Structure du projet
+## 📂 Structure du projet
 
 ```text
-online-retail-data-cleaning/
+online-retail-data-analysis/
 │
-├── data/
-│   ├── raw_data.csv
-│   ├── cleaned_data.csv
-│   └── cleaned_data.zip
-│
-├── notebooks/
-│   ├── 01_clean_and_structure.ipynb
-│   ├── 02_sql_analysis.ipynb
-│   ├── 03_visualizations.ipynb
-│   └── 04_deeper_analysis.ipynb
-│
-├── analysis.db
-└── README.md
+├── app.py
+├── requirements.txt
+├── cleaned_data.zip
+├── README.md
+├── 01_clean_and_structure.ipynb
+├── 02_sql_analysis.ipynb
+├── 03_visualizations.ipynb
+└── 04_analyse_approfondie.ipynb
 ```
 
-*Remarque : adapte cette structure aux emplacements réels de tes fichiers dans GitHub. Les données volumineuses peuvent être conservées dans une archive ZIP. La base SQLite peut être recréée à partir du CSV nettoyé si nécessaire.*
+*Cette structure est indicative : adaptez-la aux noms et emplacements réellement présents dans le dépôt.*
 
 ## 🧹 Étape 1 — Nettoyage des données
 
-**Notebook :** `01_clean_and_structure.ipynb`
+Notebook : `01_clean_and_structure.ipynb`
 
-Cette étape comprend :
+Travaux réalisés :
 
-- Le chargement et l'exploration du jeu de données.
-- La détection et la suppression des doublons exacts.
-- La conversion des dates au format datetime.
-- La normalisation des données textuelles.
-- L'examen des valeurs manquantes et des valeurs atypiques.
-- L'exportation des données nettoyées.
+- Suppression des doublons exacts.
+- Conversion des dates au format datetime.
+- Normalisation des données textuelles.
+- Examen des quantités et prix négatifs.
+- Gestion des valeurs manquantes.
+- Exportation des données nettoyées.
 
-**Résultat :** un jeu de données nettoyé de 536 641 lignes et 8 colonnes, sans doublon exact restant.
+Le jeu de données nettoyé comporte 536 641 lignes et 8 colonnes.
 
 ## 🗄️ Étape 2 — Analyse SQL
 
-**Notebook : `02_sql_analysis.ipynb`
+Notebook : `02_sql_analysis.ipynb`
 
-Les données sont chargées dans une base SQLite afin de répondre à plusieurs questions métier :
+L'analyse avec SQL et SQLite permet notamment d'étudier :
 
-- Quels pays génèrent le plus de chiffre d'affaires ?
-- À quelles heures les commandes sont-elles les plus fréquentes ?
-- Quelle est la répartition entre clients fidèles et occasionnels ?
-- Quel est le montant moyen d'une commande ?
-- Comment le chiffre d'affaires évolue-t-il chaque mois ?
+- Les produits générant le plus de chiffre d'affaires.
+- L'évolution mensuelle des ventes.
+- Les performances commerciales par pays.
+- La fréquence des achats.
+- Les indicateurs de performance des commandes.
 
-Les requêtes utilisent notamment les regroupements, les fonctions d'agrégation, les filtres et les fonctions de dates SQL.
+## 📈 Étape 3 — Visualisation des données
 
-📈 Étape 3 — Visualisation des données
+Notebook : `03_visualizations.ipynb`
 
-**Notebook :** `03_visualizations.ipynb`
+Création de graphiques permettant de comprendre :
 
-Cette étape transforme les résultats en graphiques clairs et interprétables :
+- L'évolution du chiffre d'affaires dans le temps.
+- Les principaux pays contributeurs.
+- Les périodes d'activité commerciale.
+- La distribution des montants des commandes.
+- Les habitudes d'achat des clients.
 
-- Courbe d'évolution mensuelle du chiffre d'affaires.
-- Graphique à barres des 10 pays les plus performants.
-- Graphique du nombre de commandes par heure.
-- Diagramme circulaire de la répartition des clients selon leur fidélité.
-- Histogramme de la distribution des montants des commandes.
+## 👥 Étape 4 — Analyse approfondie et segmentation RFM
 
-Chaque graphique est accompagné d'une interprétation métier afin de relier les observations aux décisions commerciales.
+Notebook : `04_analyse_approfondie.ipynb`
 
- 👥 Étape 4 — Analyse approfondie : segmentation RFM
+La méthode RFM repose sur trois indicateurs :
 
-**Notebook :** `04_deeper_analysis.ipynb`
+- **Recency (R)** : ancienneté du dernier achat.
+- **Frequency (F)** : fréquence des achats.
+- **Monetary (M)** : montant total dépensé.
 
-L'analyse RFM permet de segmenter les clients à partir de trois indicateurs :
+Cette méthode permet de distinguer différents segments de clients et de proposer des actions commerciales adaptées à leurs comportements.
 
-- **Récence (Recency)** : nombre de jours depuis le dernier achat observé.
-- **Fréquence (Frequency)** : nombre de commandes distinctes passées par le client.
-- **Valeur monétaire (Monetary)** : montant total des achats du client sur la période analysée.
+## 📊 Tableau de bord Streamlit
 
-Des scores sont calculés pour chaque indicateur afin de constituer des segments de clientèle, notamment les meilleurs clients, les clients fidèles récents, les clients à réactiver et les clients nouveaux ou occasionnels.
+L'application interactive permet d'explorer les données filtrées et d'afficher :
 
-Les résultats sont présentés à l'aide de tableaux récapitulatifs et de visualisations comparant les segments, la fréquence d'achat et les dépenses.
+- Le chiffre d'affaires.
+- Le nombre de commandes.
+- Le nombre de clients identifiés.
+- Le panier moyen par commande.
+- L'évolution mensuelle des ventes.
+- Les principaux pays et produits.
+- Des recommandations commerciales fondées sur les données sélectionnées.
 
- 💡 Intérêt métier de l'analyse RFM
+Les utilisateurs peuvent filtrer les résultats par pays, période et produit.
 
-La segmentation RFM aide une entreprise à adapter ses actions commerciales à différents profils de clients. Elle peut notamment contribuer à fidéliser les meilleurs clients, encourager les achats répétés et cibler les clients qui n'ont pas acheté depuis longtemps.
+👉 **[Ouvrir l'application Streamlit](COLLER_ICI_LE_LIEN_STREAMLIT)**
 
-Les segments et recommandations doivent être interprétés à partir des résultats réellement calculés. La récence est mesurée par rapport à la dernière date disponible dans le jeu de données et ne correspond pas nécessairement à la date actuelle.
+## 💡 Valeur métier
 
- 📌 Compétences développées
+Cette analyse peut aider une entreprise à :
 
-- Nettoyage et préparation des données avec Pandas.
-- Manipulation des dates et des valeurs manquantes.
-- Requêtes SQL et analyse de données avec SQLite.
-- Création et interprétation de visualisations.
+- Repérer les marchés les plus performants.
+- Comprendre l'évolution des ventes.
+- Identifier les produits qui contribuent le plus au chiffre d'affaires.
+- Adapter ses actions de fidélisation selon les segments RFM.
+- Faciliter la prise de décision grâce à des indicateurs visuels.
+
+Les recommandations doivent être complétées par une analyse des marges, des coûts et du contexte commercial avant toute décision d'investissement.
+
+## ▶️ Exécuter l'application en local
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/Dodo-Benjamin/online-retail-data-cleaning.git
+cd online-retail-data-cleaning
+```
+
+### 2. Installer les dépendances
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 3. Préparer les données
+
+Placer le fichier CSV nettoyé à un emplacement reconnu par `app.py`, par exemple dans le dossier `data/`, ou conserver l'archive ZIP à la racine si elle est prise en charge par la version de l'application.
+
+### 4. Lancer le tableau de bord
+
+```bash
+python -m streamlit run app.py
+```
+
+Le tableau de bord s'ouvrira dans le navigateur.
+
+## ☁️ Déploiement
+
+L'application est publiée avec Streamlit Community Cloud.
+
+Pour déployer une nouvelle version, consulter :
+
+[https://share.streamlit.io/](https://share.streamlit.io/)
+
+## 🧠 Compétences démontrées
+
+- Nettoyage et préparation des données.
 - Analyse exploratoire des données.
-- Segmentation client avec la méthode RFM.
-- Documentation et gestion de projet avec GitHub.
+- Requêtes SQL et utilisation de SQLite.
+- Analyse commerciale et segmentation RFM.
+- Création de visualisations.
+- Développement d'un tableau de bord interactif.
+- Déploiement d'une application Python.
+- Documentation et gestion d'un projet avec GitHub.
 
- 🚀 Améliorations futures
+## 👨‍💻 Auteur
 
-Les prochaines évolutions possibles sont :
+**Benjamin Dodo**
 
-- Création d'un tableau de bord interactif avec Streamlit ou Power BI.
-- Ajout de filtres par période, pays et segment client.
-- Analyse de la rétention client par cohortes.
-- Élaboration de recommandations commerciales fondées sur les résultats.
-- Automatisation de certaines étapes du traitement des données.
+Projet de portfolio en analyse de données, réalisé dans le cadre de mon apprentissage des outils Python, SQL et de la Business Intelligence.
+
+🔗 **Dépôt GitHub :**
+[https://github.com/Dodo-Benjamin/online-retail-data-cleaning](https://github.com/Dodo-Benjamin/online-retail-data-cleaning)
+
