@@ -143,5 +143,3 @@ Les prochaines évolutions possibles sont :
 - Analyse de la rétention client par cohortes.
 - Élaboration de recommandations commerciales fondées sur les résultats.
 - Automatisation de certaines étapes du traitement des données.
-
-*Projet d'analyse de données commerciales basé sur le jeu de données Online Retail.*
