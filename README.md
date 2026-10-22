@@ -1,29 +1,23 @@
-# Projet Python - Nettoyage et Structuration des données
-
-## Description
 # 🛒 Online Retail Data Analysis
 
 ## 📌 Présentation du projet
 
-Ce projet consiste à analyser un jeu de données de ventes en ligne afin d'en extraire des informations utiles à la prise de décision commerciale.
+Ce projet consiste à analyser les données d'une entreprise de vente en ligne afin d'identifier des tendances commerciales, de comprendre le comportement des clients et de produire des informations utiles à la prise de décision.
 
-L'objectif est de transformer des données brutes en données fiables, de réaliser des analyses SQL et de produire des visualisations permettant de comprendre les performances commerciales, le comportement des clients et l'évolution des ventes.
-
-Ce projet s'inscrit dans mon parcours d'apprentissage en **Data Analytics**, avec une mise en pratique des outils utilisés dans les projets réels d'analyse de données.
+Le projet couvre quatre étapes principales : le nettoyage des données, l'analyse SQL, la visualisation des résultats et la segmentation des clients par la méthode RFM.
 
 ## 🎯 Objectifs
 
-- Nettoyer et structurer un jeu de données de ventes.
-- Identifier et traiter les doublons et les valeurs manquantes.
-- Manipuler et analyser les données avec Python et Pandas.
-- Utiliser SQL pour répondre à des questions métier.
-- Étudier l'évolution du chiffre d'affaires et les performances par pays.
-- Analyser les heures de pointe, la fidélité des clients et les montants des commandes.
-- Présenter les résultats à l'aide de graphiques clairs et professionnels.
+- Nettoyer et structurer un jeu de données transactionnelles.
+- Utiliser Python et Pandas pour préparer les données.
+- Répondre à des questions métier avec SQL et SQLite.
+- Visualiser les performances commerciales avec Matplotlib et Seaborn.
+- Segmenter les clients selon leur récence, leur fréquence d'achat et leur valeur monétaire.
+- Formuler des recommandations commerciales à partir des résultats obtenus.
 
 ## 📊 Jeu de données
 
-Le projet utilise le jeu de données **Online Retail**, qui contient des informations sur les transactions d'une entreprise de vente en ligne.
+Le projet utilise le jeu de données **Online Retail**, qui contient des informations sur les factures, les produits, les quantités vendues, les prix, les dates d'achat, les clients et les pays.
 
 Après le nettoyage, le jeu de données contient :
 
@@ -31,30 +25,19 @@ Après le nettoyage, le jeu de données contient :
 - **8 colonnes**
 - **0 doublon exact restant**
 
-Les principales variables sont :
+Les principales colonnes sont `InvoiceNo`, `StockCode`, `Description`, `Quantity`, `InvoiceDate`, `UnitPrice`, `CustomerID` et `Country`.
 
-| Colonne | Description |
-|---|---|
-| `InvoiceNo` | Numéro de facture |
-| `StockCode` | Code du produit |
-| `Description` | Description du produit |
-| `Quantity` | Quantité vendue |
-| `InvoiceDate` | Date et heure de la transaction |
-| `UnitPrice` | Prix unitaire |
-| `CustomerID` | Identifiant du client |
-| `Country` | Pays du client |
-
-Les valeurs manquantes et les transactions particulières sont examinées pendant le nettoyage. Les quantités négatives sont conservées pour représenter les retours ou annulations potentiels, tandis que les analyses de ventes positives appliquent des filtres adaptés.
+Les valeurs manquantes, les doublons et les transactions atypiques sont examinés durant la préparation des données. Les quantités négatives sont conservées dans le jeu nettoyé pour tenir compte des retours ou annulations potentiels. Les analyses de ventes positives appliquent des filtres adaptés à chaque question métier.
 
 ## 🛠️ Technologies utilisées
 
-- **Python** : langage de programmation.
-- **Pandas** : manipulation et nettoyage des données.
-- **SQLite** : stockage local et analyse SQL.
-- **Matplotlib** : création de graphiques.
-- **Seaborn** : visualisations statistiques.
-- **Jupyter Notebook** : environnement de travail.
-- **GitHub** : gestion et partage du projet.
+- **Python**
+- **Pandas**
+- **SQLite / SQL**
+- **Matplotlib**
+- **Seaborn**
+- **Jupyter Notebook**
+- **Git et GitHub**
 
 ## 📁 Structure du projet
 
@@ -69,79 +52,96 @@ online-retail-data-cleaning/
 ├── notebooks/
 │   ├── 01_clean_and_structure.ipynb
 │   ├── 02_sql_analysis.ipynb
-│   └── 03_visualizations.ipynb
+│   ├── 03_visualizations.ipynb
+│   └── 04_deeper_analysis.ipynb
 │
 ├── analysis.db
 └── README.md
 ```
 
-*Remarque : les fichiers et dossiers présentés correspondent à la structure cible. Adapte cette arborescence aux fichiers réellement présents dans ton dépôt. Le jeu de données nettoyé peut être distribué sous forme d'archive ZIP.*
+*Remarque : adapte cette structure aux emplacements réels de tes fichiers dans GitHub. Les données volumineuses peuvent être conservées dans une archive ZIP. La base SQLite peut être recréée à partir du CSV nettoyé si nécessaire.*
 
 ## 🧹 Étape 1 — Nettoyage des données
 
-Le notebook `01_clean_and_structure.ipynb` présente les opérations de préparation des données :
+**Notebook :** `01_clean_and_structure.ipynb`
 
-- Chargement et exploration du jeu de données.
-- Détection et suppression des doublons exacts.
-- Conversion de `InvoiceDate` au format datetime.
-- Normalisation des valeurs textuelles.
-- Examen des valeurs manquantes et des valeurs atypiques.
-- Exportation des données nettoyées.
+Cette étape comprend :
 
-**Résultat :** un jeu de données structuré de 536 641 lignes et 8 colonnes, sans doublon exact restant.
+- Le chargement et l'exploration du jeu de données.
+- La détection et la suppression des doublons exacts.
+- La conversion des dates au format datetime.
+- La normalisation des données textuelles.
+- L'examen des valeurs manquantes et des valeurs atypiques.
+- L'exportation des données nettoyées.
+
+**Résultat :** un jeu de données nettoyé de 536 641 lignes et 8 colonnes, sans doublon exact restant.
 
 ## 🗄️ Étape 2 — Analyse SQL
 
-Le notebook `02_sql_analysis.ipynb` utilise SQLite pour répondre à plusieurs questions métier :
+**Notebook : `02_sql_analysis.ipynb`
+
+Les données sont chargées dans une base SQLite afin de répondre à plusieurs questions métier :
 
 - Quels pays génèrent le plus de chiffre d'affaires ?
 - À quelles heures les commandes sont-elles les plus fréquentes ?
-- Quelle est la proportion de clients fidèles et occasionnels ?
+- Quelle est la répartition entre clients fidèles et occasionnels ?
 - Quel est le montant moyen d'une commande ?
 - Comment le chiffre d'affaires évolue-t-il chaque mois ?
 
-Ces analyses reposent notamment sur les requêtes SQL, les agrégations, les regroupements et les fonctions de dates.
+Les requêtes utilisent notamment les regroupements, les fonctions d'agrégation, les filtres et les fonctions de dates SQL.
 
-## 📈 Étape 3 — Visualisation des données
+📈 Étape 3 — Visualisation des données
 
-Le notebook `03_visualizations.ipynb` transforme les résultats en graphiques interprétables :
+**Notebook :** `03_visualizations.ipynb`
 
-- **Graphique linéaire** : évolution mensuelle du chiffre d'affaires.
-- **Graphique à barres** : classement des pays par chiffre d'affaires.
-- **Graphique à barres** : nombre de commandes par heure.
-- **Diagramme circulaire** : répartition des clients fidèles et occasionnels.
-- **Histogramme** : distribution des montants des commandes.
+Cette étape transforme les résultats en graphiques clairs et interprétables :
 
-Chaque visualisation est accompagnée d'une interprétation métier afin de relier les résultats aux décisions que pourrait prendre une entreprise.
+- Courbe d'évolution mensuelle du chiffre d'affaires.
+- Graphique à barres des 10 pays les plus performants.
+- Graphique du nombre de commandes par heure.
+- Diagramme circulaire de la répartition des clients selon leur fidélité.
+- Histogramme de la distribution des montants des commandes.
 
-## 💡 Compétences développées
+Chaque graphique est accompagné d'une interprétation métier afin de relier les observations aux décisions commerciales.
 
-Ce projet m'a permis de mettre en pratique :
+ 👥 Étape 4 — Analyse approfondie : segmentation RFM
 
-- Le nettoyage et la préparation des données.
-- La manipulation de données avec Pandas.
-- Les requêtes SQL et l'analyse de données avec SQLite.
-- La création de visualisations avec Matplotlib et Seaborn.
-- L'interprétation des indicateurs commerciaux.
-- L'organisation et la documentation d'un projet sur GitHub.
+**Notebook :** `04_deeper_analysis.ipynb`
 
-## 🚀 Améliorations possibles
+L'analyse RFM permet de segmenter les clients à partir de trois indicateurs :
 
-Les prochaines évolutions du projet pourraient inclure :
+- **Récence (Recency)** : nombre de jours depuis le dernier achat observé.
+- **Fréquence (Frequency)** : nombre de commandes distinctes passées par le client.
+- **Valeur monétaire (Monetary)** : montant total des achats du client sur la période analysée.
 
-- La création d'un tableau de bord interactif avec Streamlit ou Power BI.
-- L'ajout de filtres par pays, période et produit.
-- L'analyse plus approfondie de la rétention et de la valeur client.
-- La formulation de recommandations commerciales fondées sur les résultats observés.
+Des scores sont calculés pour chaque indicateur afin de constituer des segments de clientèle, notamment les meilleurs clients, les clients fidèles récents, les clients à réactiver et les clients nouveaux ou occasionnels.
 
-## 👨‍💻 Auteur
+Les résultats sont présentés à l'aide de tableaux récapitulatifs et de visualisations comparant les segments, la fréquence d'achat et les dépenses.
 
-**Benjamin Dodo**
+ 💡 Intérêt métier de l'analyse RFM
 
-Projet personnel de Data Analytics réalisé dans le cadre de mon apprentissage de Python, SQL et de la visualisation des données.
+La segmentation RFM aide une entreprise à adapter ses actions commerciales à différents profils de clients. Elle peut notamment contribuer à fidéliser les meilleurs clients, encourager les achats répétés et cibler les clients qui n'ont pas acheté depuis longtemps.
 
-🔗 **GitHub :** [Dodo-Benjamin](https://github.com/Dodo-Benjamin)
+Les segments et recommandations doivent être interprétés à partir des résultats réellement calculés. La récence est mesurée par rapport à la dernière date disponible dans le jeu de données et ne correspond pas nécessairement à la date actuelle.
 
----
+ 📌 Compétences développées
 
-*Projet pédagogique d'analyse de données commerciales à partir du jeu de données Online Retail.*
+- Nettoyage et préparation des données avec Pandas.
+- Manipulation des dates et des valeurs manquantes.
+- Requêtes SQL et analyse de données avec SQLite.
+- Création et interprétation de visualisations.
+- Analyse exploratoire des données.
+- Segmentation client avec la méthode RFM.
+- Documentation et gestion de projet avec GitHub.
+
+ 🚀 Améliorations futures
+
+Les prochaines évolutions possibles sont :
+
+- Création d'un tableau de bord interactif avec Streamlit ou Power BI.
+- Ajout de filtres par période, pays et segment client.
+- Analyse de la rétention client par cohortes.
+- Élaboration de recommandations commerciales fondées sur les résultats.
+- Automatisation de certaines étapes du traitement des données.
+
+*Projet d'analyse de données commerciales basé sur le jeu de données Online Retail.*
